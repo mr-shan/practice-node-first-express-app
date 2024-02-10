@@ -28,7 +28,7 @@ router.get('/products', (req, res) => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Shop Mart - Home</title>
+      <title>Shop Mart - Products Home</title>
       <link rel="stylesheet" href="css/nav.css">
       <link rel="stylesheet" href="css/all-products.css">
     </head>
@@ -46,11 +46,13 @@ router.get('/products', (req, res) => {
           ${productsList
             .map(
               (product, index) =>
-                '<li style="animation-delay: ' + index * 60 + 'ms"><span class="title">' +
+                '<li style="animation-delay: ' + index * 60 + 'ms">' +
+                '<img src="https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg"/>' +
+                '<div class="header"><span class="title">' +
                 product.name +
                 '</span> <span class="price">&#8377;' +
-                product.price +
-                '</span></li>'
+                product.price + '</span></div>' +
+                '<button class="btn-add-cart">' + 'Add to Cart</button></li>'
             )
             .join('')}
         </ul>
