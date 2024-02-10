@@ -1,0 +1,57 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.all-products {
+  margin: auto;
+  max-width: 48rem;
+  margin-top: 2rem;
+}
+
+.all-products h1 {
+  text-align: center;
+}
+
+.all-products ul {
+  background: white;
+  box-shadow: none;
+  padding: 1rem;
+  display: block;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.all-products ul li {
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px #aaa;
+  padding: 1rem;
+  background: transparent;
+  width: 18rem;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  animation: list-in 0.3s ease-out forwards;
+}
+
+.all-products ul li .price {
+  color: royalblue;
+}
+
+@keyframes list-in {
+  from {
+    transform: translateX(-5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

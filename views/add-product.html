@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Product</title>
+  <link rel="stylesheet" href="css/add-product.css">
+  <link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/products">All Products</a></li>
+      <li style="float: right;"><a class="active" href="/add-product">Add New Product</a></li>
+    </ul>
+  </nav>
+  <div class="add-product-form-wrapper">
+    <h3>Add new product</h3>
+    <hr><br>
+    <form action="/products" method="POST">
+      <div class="form-control">
+        <label for="name">Product Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+      </div>
+      <div class="form-control">
+        <label for="price">Price:</label><br>
+        <input type="text" id="price" name="price" required>
+        <br><br>
+      </div>
+      <button type="submit">Add Product</button>
+    </form> 
+  </div>
+</body>
+</html>
