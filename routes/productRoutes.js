@@ -9,14 +9,14 @@ const router = express.Router();
 const productsList = [
   {
     id: 1,
-    name: 'Harry Potter',
-    price: 500,
+    name: 'Harry Potter Book',
+    price: '500',
     category: 'book',
   },
   {
     id: 2,
-    name: 'Apple iPhone',
-    price: 80000,
+    name: 'Apple iPhone 15 Pro',
+    price: '80,000',
     category: 'mobile',
   },
 ];
@@ -46,7 +46,7 @@ router.get('/products', (req, res) => {
           ${productsList
             .map(
               (product, index) =>
-                '<li style="animation-delay: ' + index * 60 + 'ms">' +
+                '<li style="animation-delay: ' + index * 40 + 'ms">' +
                 '<img src="https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg"/>' +
                 '<div class="header"><span class="title">' +
                 product.name +
