@@ -6,25 +6,25 @@
 </head>
 <body>
   <%- include('./partials/navbar'); %>
-  <div class="add-product-form-wrapper">
-    <h3>Add new product</h3>
+  <div class="shop-add-product_container">
+    <h3 class="shop-add-product_header">Add new product</h3>
     <hr><br>
     <form action="/products" method="POST">
-      <div class="form-control">
-        <label for="name">Product Name:</label>
+      <div class="shop-add-product_form-control">
         <input type="text" id="name" name="name" required>
+        <label for="name">Product Name:</label>
       </div>
-      <div class="form-control">
-        <label for="price">Price:</label>
+      <div class="shop-add-product_form-control">
         <input type="text" id="price" name="price" required>
+        <label for="price">Price:</label>
       </div>
-      <div class="form-control">
-        <label for="price">Product Image URL:</label>
+      <div class="shop-add-product_form-control">
         <input type="text" id="imageUrl" name="imageUrl">
+        <label for="imageUrl">Product Image URL:</label>
       </div>
-      <div class="form-control-buttons">
-        <a href="/" class="form-control-link">Cancel</a>
-        <button type="submit">Add Product</button>
+      <div class="shop-add-product_form-control-btns">
+        <a class="btn-link btn-link-primary" href="/">Cancel</a>
+        <button class="btn btn-primary" type="submit">Add Product</button>
       </div>
     </form> 
   </div>

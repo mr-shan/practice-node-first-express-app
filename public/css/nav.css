@@ -1,4 +1,4 @@
-ul {
+.shop-nav-bar_nav-items-wrapper {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -7,11 +7,11 @@ ul {
   box-shadow: 0px 0px 5px #555;
 }
 
-li {
+.shop-nav-bar_nav-item {
   float: left;
 }
 
-li a {
+.shop-nav-bar_nav-link {
   display: block;
   color: white;
   text-align: center;
@@ -21,16 +21,16 @@ li a {
   font-size: 1rem;
 }
 
-li a:hover {
+.shop-nav-bar_nav-link:hover {
   background-color: #eee;
   color: royalblue;
 }
 
-li a.active:hover {
+.shop-nav-bar_nav-link.active:hover {
   background-color: #eee;
 }
 
-.active {
+.shop-nav-bar_nav-link.active {
   background-color: #eee; 
   color: royalblue;
 }

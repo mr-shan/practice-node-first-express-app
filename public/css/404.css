@@ -1,21 +1,16 @@
-body {
+.shop-404_container {
   text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
-h1 {
+.shop-404_header {
   color: royalblue;
 }
 
-p {
+.shop-404_text {
   color: #666;
 }
 
-a {
-  text-decoration: none;
+.shop-404_link {
   font-size: 1.2rem;
-  font-weight: bold;
   color: mediumorchid;
 }

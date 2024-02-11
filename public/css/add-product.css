@@ -1,11 +1,4 @@
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.add-product-form-wrapper {
+.shop-add-product_container {
   border-radius: 10px;
   box-shadow: 0px 0px 8px #999;
   padding: 1rem;
@@ -17,8 +10,8 @@ body {
   width: 85dvw;
 }
 
-.add-product-form-wrapper h3 {
-  color: royalblue;
+.shop-add-product_header {
+  color: #666;
   padding-top: 0;
   margin-top: 0.25rem;
   margin-bottom: 1rem;
@@ -27,20 +20,20 @@ hr {
   border: none;
   border-bottom: solid 1px #ccc;
 }
-.form-control  {
+.shop-add-product_form-control  {
   text-align: left;
   max-width: 20rem;
   margin: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   margin-bottom: 1.5rem;
 }
-.add-product-form-wrapper label {
+.shop-add-product_container label {
   color: #999;
   text-align: left;
 }
 
-.add-product-form-wrapper input {
+.shop-add-product_container input {
   margin-top: 0.5rem;
   padding: 0.5rem;
   border-radius: 5px;
@@ -49,7 +42,15 @@ hr {
   border: solid 1px #ccc;
 }
 
-.form-control-buttons {
+.shop-add-product_container input:focus{
+  outline: solid 2px royalblue;
+}
+
+.shop-add-product_container input:focus + label {
+  color: royalblue;
+}
+
+.shop-add-product_form-control-btns {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -59,34 +60,14 @@ hr {
   max-width: 20rem;
 }
 
-.add-product-form-wrapper button {
-  background-color: royalblue;
-  color: white;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  font-family: inherit;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.shop-add-product_form-control-btns button {
   flex: 1;
 }
 
-.add-product-form-wrapper .form-control-link {
-  display: inline-block;
-  color: royalblue;
-  background: white;
-  border: solid 1px royalblue;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
+.shop-add-product_form-control-btns a {
   flex: 1;
 }
 
-.add-product-form-wrapper button:hover {
-  background-color: rgb(108, 141, 241);
-}
 
 @keyframes list-in {
   from {

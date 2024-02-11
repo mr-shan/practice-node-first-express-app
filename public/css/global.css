@@ -1,0 +1,43 @@
+:root {
+  --primary: royalblue;
+  --secondary: mediumorchid;
+  --text-1: #333;
+  --text-2: white;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+}
+
+.btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: var(--text-2);
+  background-color: var(--primary);
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-link-primary {
+  color: var(--primary);
+  background: var(--text-2);
+  border: solid 1px var(--primary);
+}

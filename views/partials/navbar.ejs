@@ -1,15 +1,15 @@
-<nav>
-  <ul>
-    <li>
-      <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+<nav class="shop-nav-bar">
+  <ul class="shop-nav-bar_nav-items-wrapper">
+    <li class="shop-nav-bar_nav-item">
+      <a class="<%= path === '/' ? 'active shop-nav-bar_nav-link' : 'shop-nav-bar_nav-link' %>" href="/">Home</a>
     </li>
-    <li>
-      <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">
+    <li class="shop-nav-bar_nav-item">
+      <a class="<%= path === '/products' ? 'active shop-nav-bar_nav-link' : 'shop-nav-bar_nav-link' %>" href="/products">
         All Products
       </a>
     </li>
-    <li style="float: right">
-      <a class="<%= path === '/add-product' ? 'active' : '' %>" href="/add-product">
+    <li class="shop-nav-bar_nav-item" style="float: right">
+      <a class="<%= path === '/add-product' ? 'active shop-nav-bar_nav-link' : 'shop-nav-bar_nav-link' %>" href="/add-product">
         Add New Product
       </a>
     </li>
