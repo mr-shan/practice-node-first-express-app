@@ -7,20 +7,7 @@ const rootPath = require('./../helpers/path');
 const router = express.Router();
 
 const productsList = [
-  {
-    id: 1,
-    name: 'Harry Potter Book',
-    price: '500',
-    category: 'book',
-    img: 'https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg',
-  },
-  {
-    id: 2,
-    name: 'Apple iPhone 15 Pro',
-    price: '80,000',
-    category: 'mobile',
-    img: 'https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg',
-  },
+
 ];
 
 router.get('/products', (req, res) => {
@@ -38,7 +25,7 @@ router.post('/products', (req, res) => {
       id: productsList.length + 1,
       name: body.name.trim(),
       price: body.price.trim(),
-      img: 'https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg',
+      img: body.imageUrl.trim() || 'https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg',
     });
     res.redirect('/products');
   } else {

@@ -67,6 +67,24 @@ body {
   cursor: pointer;
 }
 
+.no-products-wrapper {
+  margin: auto;
+  text-align: center;
+}
+
+.no-products-wrapper h3 {
+  color: royalblue;
+}
+
+.no-products-wrapper a {
+  color: white;
+  background-color: royalblue;
+  display: inline-block;
+  text-decoration: none;
+  padding: 4px 0.75rem;
+  border-radius: 5px;
+}
+
 @keyframes list-in {
   from {
     transform: translateX(-5%);

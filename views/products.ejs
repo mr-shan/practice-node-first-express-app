@@ -8,21 +8,25 @@
     <%- include('./partials/navbar'); %>
     <div class="all-products">
       <h1>All Products</h1>
-
-      <ul>
-        <% products.forEach((prod, index) => { %>
-        <li style="animation-delay: <%= index * 40 %>ms">
-          <img
-            src="<%= prod.img %>"
-          />
-          <div class="header">
-            <span class="title"><%= prod.name %></span>
-            <span class="price">&#8377; <%= prod.price %></span>
-          </div>
-          <button class="btn-add-cart">Add to cart</button>
-        </li>
-        <% }); %>
-      </ul>
+      <% if (products.length) {%>
+        <ul>
+          <% products.forEach((prod, index) => { %>
+          <li style="animation-delay: <%= index * 40 %>ms">
+            <img src="<%= prod.img %>" />
+            <div class="header">
+              <span class="title"><%= prod.name %></span>
+              <span class="price">&#8377;<%= prod.price %></span>
+            </div>
+            <button class="btn-add-cart">Add to cart</button>
+          </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <div class="no-products-wrapper">
+          <h3>No products found!</h3>
+          <p><a href="/add-product">Click here</a> to add products into the store!</p>
+        </div>
+      <% } %>
     </div>
   </body>
 </html>
