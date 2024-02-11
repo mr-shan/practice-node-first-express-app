@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop Mart - Add New Product</title>
+  <%- include('./partials/header'); %>
   <link rel="stylesheet" href="css/add-product.css">
-  <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/products">All Products</a></li>
-      <li style="float: right;"><a class="active" href="/add-product">Add New Product</a></li>
-    </ul>
-  </nav>
+  <%- include('./partials/navbar'); %>
   <div class="add-product-form-wrapper">
     <h3>Add new product</h3>
     <hr><br>
@@ -27,7 +18,10 @@
         <label for="price">Price:</label>
         <input type="text" id="price" name="price" required>
       </div>
-      <button type="submit">Add Product</button>
+      <div class="form-control-buttons">
+        <a href="/" class="form-control-link">Cancel</a>
+        <button type="submit">Add Product</button>
+      </div>
     </form> 
   </div>
 </body>
