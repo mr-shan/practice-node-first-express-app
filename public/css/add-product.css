@@ -14,6 +14,7 @@ body {
   margin-top:2rem;
   max-width: 30rem;
   animation: list-in ease-out 0.25s forwards;
+  width: 85dvw;
 }
 
 .add-product-form-wrapper h3 {
@@ -52,8 +53,10 @@ hr {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+  margin: auto;
+  margin-top: 2.2rem;
+  margin-bottom: 0.75rem;
+  max-width: 20rem;
 }
 
 .add-product-form-wrapper button {
@@ -65,7 +68,7 @@ hr {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 8rem;
+  flex: 1;
 }
 
 .add-product-form-wrapper .form-control-link {
@@ -77,8 +80,8 @@ hr {
   font-size: 1rem;
   border-radius: 5px;
   cursor: pointer;
-  width: 8dvw;
   text-decoration: none;
+  flex: 1;
 }
 
 .add-product-form-wrapper button:hover {

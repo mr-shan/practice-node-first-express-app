@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const productRoutes = require('./routes/productRoutes');
+const appRoutes = require('./routes/appRoutes');
 
 const app = express();
 
@@ -16,23 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-// sample middleware
-// app.use((req, res, next) => {
-//   console.log(`Incomming request: ${req.url}`);
-//   next();
-// })
-
+// routes
 app.use(productRoutes)
+app.use(appRoutes);
 
-app.get('', (req, res, next) => {
-  // res.sendFile(path.join(__dirname, 'views', 'index.html'));
-  res.render('home', { pageTitle: 'Shop Mart - Home', path: '/' })
-})
-
-app.use((req, res, next) => {
-  // res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
-  res.status(404).render('404', { pageTitle: '404! Not Found.', path: req.path })
-})
 
 app.listen(3000, () => {
   console.log('Express server running at 3000');

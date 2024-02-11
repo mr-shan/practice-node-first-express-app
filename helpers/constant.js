@@ -1,0 +1,1 @@
+module.exports.DEFAULT_PRODUCT_IMAGE_URL = 'https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg'
