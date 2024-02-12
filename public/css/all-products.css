@@ -1,6 +1,7 @@
 .shop-products_container {
   margin: auto;
   margin-top: 2rem;
+  animation: page-load ease-out 0.25s forwards;
 }
 
 .shop-products_title {
@@ -14,7 +15,7 @@
   display: block;
   overflow: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 1rem;
   max-width: 1400px;
   margin: auto;
@@ -64,6 +65,18 @@
   text-decoration: none;
   padding: 4px 0.75rem;
   border-radius: 5px;
+}
+
+.shop-products_products-action-btns {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.shop-products_products-action-btns a,
+.shop-products_products-action-btns button {
+  flex: 1;
+  text-align: center;
 }
 
 @keyframes list-in {

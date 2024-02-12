@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/header') %>
+  <link rel="stylesheet" href="/css/product-details.css">
+</head>
+<body>
+  <%- include('./partials/navbar'); %>
+  <div class="shop-product-details_container">
+    <img src="<%= product.imageUrl %>" />
+    <div class="shop-product-details_body">
+      <h3 class="title"><%= product.name %></h3>
+      <span class="price">&#8377;<%= product.price %></span>
+      <p><%= product.description %></p>
+      <div class="shop-product-details_buttons">
+        <a class="btn-link btn-link-primary" href="/products">Go Back</a>
+        <button class="btn btn-primary">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

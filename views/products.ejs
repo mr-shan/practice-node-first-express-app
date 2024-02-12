@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <%- include('./partials/header'); %>
-    <link rel="stylesheet" href="css/all-products.css" />
+    <link rel="stylesheet" href="/css/all-products.css" />
   </head>
   <body>
     <%- include('./partials/navbar'); %>
@@ -17,7 +17,10 @@
               <span class="title"><%= prod.name %></span>
               <span class="price">&#8377;<%= prod.price %></span>
             </div>
-            <button class="btn btn-primary">Add to cart</button>
+            <div class="shop-products_products-action-btns">
+              <a class="btn-link btn-link-primary" href="/products/<%= prod.id %>">Details</a>
+              <button class="btn btn-primary">Add to cart</button>
+            </div>
           </li>
           <% }); %>
         </ul>

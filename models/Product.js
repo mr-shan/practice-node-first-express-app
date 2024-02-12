@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 const path = require('path');
 const fs = require('fs');
 
@@ -17,10 +19,13 @@ const readProductFileContents = (callback) => {
 }
 
 class Product {
-  constructor(name, price, imgUrl) {
+  constructor(name, price, imgUrl = DEFAULT_PRODUCT_IMAGE_URL, description = '', categories = []) {
+    this.id = uuidv4();
     this.name = name;
     this.price = price;
-    this.imageUrl = imgUrl || DEFAULT_PRODUCT_IMAGE_URL;
+    this.imageUrl = imgUrl;
+    this.description = description
+    this.categories = categories
   }
 
   save(callback) {
@@ -32,6 +37,13 @@ class Product {
 
   static fetchAll(callback) {
     readProductFileContents(callback)
+  }
+
+  static get(id, callback) {
+    readProductFileContents(products => {
+      const reqProd = products.find(e => e.id === id);
+      callback(reqProd);
+    })
   }
 }
 

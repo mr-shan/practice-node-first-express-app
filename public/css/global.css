@@ -41,3 +41,14 @@ body {
   background: var(--text-2);
   border: solid 1px var(--primary);
 }
+
+@keyframes page-load {
+  from {
+    transform: translateY(-5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

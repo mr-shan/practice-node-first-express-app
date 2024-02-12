@@ -1,5 +1,6 @@
 .shop-404_container {
   text-align: center;
+  animation: page-load ease-out 0.25s forwards;
 }
 
 .shop-404_header {

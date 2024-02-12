@@ -2,7 +2,7 @@
   text-align: center;
   color: #333;
   margin-top: 2rem;
-  animation: list-in ease-out 0.25s forwards;
+  animation: page-load ease-out 0.25s forwards;
 }
 
 .shop-home_container a {
