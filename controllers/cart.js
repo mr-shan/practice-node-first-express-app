@@ -34,3 +34,12 @@ module.exports.addToCart = (req, res, next) => {
     res.redirect('/cart');
   }
 }
+
+module.exports.deleteCart = (req, res, next) => {
+  const id = req.body.productId;
+  console.log("Inside delete cart item", id)
+  if (!id) return res.redirect('/cart');
+
+  const deleteOperation = shoppingCart.remove(id);
+  res.redirect('/cart');
+}

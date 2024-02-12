@@ -41,14 +41,15 @@ class Cart {
 
   remove(productId) {
     const productIndex = this.cart.findIndex(e => e.productId === productId);
-    if (productIndex === -1) return;
+    if (productIndex === -1) return false;
 
-    this.cart[productIndex].quantity-- ;
-    this.totalPrice -= this.cart[productIndex].totalPrice;
+    this.cart[productIndex].quantity-= 1;
+    this.totalPrice -= this.cart[productIndex].price;
     if (this.cart[productIndex].quantity <= 0) {
-      this.cart.splice(productIndex, 0);
+      this.cart.splice(productIndex, 1);
     }
     this.saveCartItems();
+    return true;
   }
 
   saveCartItems() {
