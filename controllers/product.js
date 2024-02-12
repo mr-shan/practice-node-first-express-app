@@ -35,7 +35,7 @@ module.exports.postProduct = (req, res) => {
       body.name.trim(),
       body.price.trim(),
       body.imageUrl?.trim(),
-      'Test description',
+      body.description?.trim() || 'Test description',
       []
     );
     newProd.save((error) => {
@@ -51,8 +51,49 @@ module.exports.postProduct = (req, res) => {
 };
 
 module.exports.getAddProduct = (req, res) => {
-  res.render('add-product', {
+  res.render('admin/add-product', {
     pageTitle: 'Shop Mart - Add New Product',
     path: '/add-product',
   });
+};
+
+module.exports.getEditProduct = (req, res, next) => {
+  const id = req.params.productId;
+  Product.get(id, (product) => {
+    console.log(product)
+    if (!product) {
+      res
+        .status(404)
+        .render('404', { pageTitle: '404! Not Found.', path: req.path });
+      return;
+    } else {
+      res.render('admin/edit-product', {
+        pageTitle: 'Shop Mart - ' + product.name,
+        product: product,
+        path: '/products',
+      });
+    }
+  });
+};
+
+module.exports.patchEditProduct = (req, res, next) => {
+  const id = req.params.productId;
+  const data = {
+    name: body.name.trim(),
+    price: body.price.trim(),
+    imageUrl: body.imageUrl?.trim(),
+    description: body.description?.trim(),
+  }
+  console.log("inside patch edit product", id, data)
+  Product.patch(id, data, (error, productDetails) => {
+    if (error) {
+      res.status(404).render('404', { pageTitle: '404! Not Found.', path: req.path });
+    } else {
+      res.render('product-details', {
+        pageTitle: 'Shop Mart - ' + productDetails.name,
+        product: productDetails,
+        path: '/products',
+      });
+    }
+  })
 };

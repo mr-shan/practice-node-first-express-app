@@ -22,7 +22,7 @@ hr {
 }
 .shop-add-product_form-control  {
   text-align: left;
-  max-width: 20rem;
+  max-width: 28rem;
   margin: auto;
   display: flex;
   flex-direction: column-reverse;
@@ -33,7 +33,8 @@ hr {
   text-align: left;
 }
 
-.shop-add-product_container input {
+.shop-add-product_container input,
+.shop-add-product_container textarea {
   margin-top: 0.5rem;
   padding: 0.5rem;
   border-radius: 5px;
@@ -42,11 +43,13 @@ hr {
   border: solid 1px #ccc;
 }
 
-.shop-add-product_container input:focus{
+.shop-add-product_container input:focus,
+.shop-add-product_container textarea:focus {
   outline: solid 2px royalblue;
 }
 
-.shop-add-product_container input:focus + label {
+.shop-add-product_container input:focus + label,
+.shop-add-product_container textarea:focus + label {
   color: royalblue;
 }
 

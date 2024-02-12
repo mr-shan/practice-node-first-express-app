@@ -1,6 +1,7 @@
 .shop-products_container {
   margin: auto;
   margin-top: 2rem;
+  color: var(--text-1);
 }
 
 .shop-products_title {

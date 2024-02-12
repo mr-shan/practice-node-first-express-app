@@ -33,7 +33,25 @@ class Product {
       products.push(this);
       fs.writeFile(productDataFilePath, JSON.stringify(products), callback);
     })
-  }  
+  }
+
+  static patch(productId, data, callback) {
+    readProductFileContents(products => {
+      const productIndex = products.findIndex(e => e.id === productId);
+      if (productIndex === -1) {
+        callback('product not found');
+      }
+      const productDetails = products[productIndex];
+      products[productIndex] = { ...productDetails, ...data };
+      fs.writeFile(productDataFilePath, JSON.stringify(products), (error) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(null, products[productIndex]);
+        }
+      });
+    })
+  }
 
   static fetchAll(callback) {
     readProductFileContents(callback)

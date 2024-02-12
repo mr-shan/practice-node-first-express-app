@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/header'); %>
+    <link rel="stylesheet" href="/css/cart.css" />
+  </head>
+  <body>
+    <%- include('./partials/navbar'); %>
+    <div class="shop-cart_container">
+      <h1 class="shop-cart_title">Shopping Cart</h1>
+      <% if (products.length) {%>
+        <ul class="shop-cart_products-wrapper">
+          <% products.forEach((prod, index) => { %>
+          <li class="shop-cart_product-item" style="animation-delay: <%= index * 60 %>ms">
+            <img src="<%= prod.imageUrl %>" />
+            <div class="shop-cart_contents">
+              <div class="header">
+                <h3 class="title"><%= prod.name %></h3>
+                <p class="price"><span style="color: var(--text-1)">Price: </span>&#8377;<%= prod.price %></p>
+                <span class="price"><span style="color: var(--text-1)">Quantity: </span><%= prod.quantity %></span>
+              </div>
+              <div class="shop-cart_products-action-btns">
+                <a class="btn-link btn-link-primary" href="/products/<%= prod.id %>">Details</a>
+                <button class="btn btn-primary">Remove</button>
+              </div>
+            </div>
+          </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <div class="shop-cart_no-products-wrapper">
+          <h3>You cart is empty!</h3>
+          <p><a href="/products">Click here</a> to start shopping.</p>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

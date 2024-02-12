@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('./partials/header'); %>
+  <%- include('./../partials/header'); %>
   <link rel="stylesheet" href="/css/add-product.css">
 </head>
 <body>
-  <%- include('./partials/navbar'); %>
+  <%- include('./../partials/navbar'); %>
   <div class="shop-add-product_container">
     <h3 class="shop-add-product_header">Add new product</h3>
     <hr><br>
-    <form action="/products" method="POST">
+    <form action="/admin/products" method="POST">
       <div class="shop-add-product_form-control">
         <input type="text" id="name" name="name" required>
         <label for="name">Product Name:</label>
@@ -21,6 +21,11 @@
       <div class="shop-add-product_form-control">
         <input type="text" id="imageUrl" name="imageUrl">
         <label for="imageUrl">Product Image URL:</label>
+      </div>
+      <div class="shop-add-product_form-control">
+        <textarea rows="3" id="description" name="description">
+        </textarea>
+        <label for="description">Description</label>
       </div>
       <div class="shop-add-product_form-control-btns">
         <a class="btn-link btn-link-primary" href="/">Cancel</a>

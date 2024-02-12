@@ -17,10 +17,12 @@
               <span class="title"><%= prod.name %></span>
               <span class="price">&#8377;<%= prod.price %></span>
             </div>
-            <div class="shop-products_products-action-btns">
+            <form method="POST" action="/cart" class="shop-products_products-action-btns">
               <a class="btn-link btn-link-primary" href="/products/<%= prod.id %>">Details</a>
+              <input type="hidden" name="productId" value="<%= prod.id %>">
+              <input type="hidden" name="price" value="<%= prod.price %>">
               <button class="btn btn-primary">Add to cart</button>
-            </div>
+            </form>
           </li>
           <% }); %>
         </ul>

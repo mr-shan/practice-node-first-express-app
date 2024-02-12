@@ -3,8 +3,11 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// route imports
 const productRoutes = require('./routes/productRoutes');
 const appRoutes = require('./routes/appRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 const app = express();
 
@@ -19,6 +22,8 @@ app.use(bodyParser.json())
 
 // routes
 app.use(productRoutes)
+app.use('/admin',adminRoutes);
+app.use(cartRoutes);
 app.use(appRoutes);
 
 
