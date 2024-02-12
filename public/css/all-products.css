@@ -1,11 +1,11 @@
 .shop-products_container {
   margin: auto;
   margin-top: 2rem;
-  animation: page-load ease-out 0.25s forwards;
 }
 
 .shop-products_title {
   text-align: center;
+  animation: page-load ease-out 0.25s forwards;
 }
 
 .shop-products_products-wrapper {
