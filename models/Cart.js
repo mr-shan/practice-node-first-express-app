@@ -25,21 +25,26 @@ class Cart {
   initCart() {
     readCartFileContents(cartContents => {
       this.cart = cartContents;
+      this.totalPrice = 0;
+      this.cart.forEach(item => {
+        this.totalPrice += item.price * item.quantity
+      })
+      if (isNaN(this.totalPrice)) this.totalPrice = 0;
     })
   }
 
-  add(productId, price) {
+  add(productId, price, callback) {
     const productIndex = this.cart.findIndex(e => e.productId === productId);
     if (productIndex === -1) {
-      this.cart.push({ productId: productId, quantity: 1 });
+      this.cart.push({ productId: productId, quantity: 1, price: price });
     } else {
       this.cart[productIndex].quantity++;
     }
-    this.totalPrice+= price;
-    this.saveCartItems();
+    this.totalPrice+= parseFloat(price);
+    this.saveCartItems(callback);
   }
 
-  remove(productId) {
+  remove(productId, callback) {
     const productIndex = this.cart.findIndex(e => e.productId === productId);
     if (productIndex === -1) return false;
 
@@ -48,13 +53,15 @@ class Cart {
     if (this.cart[productIndex].quantity <= 0) {
       this.cart.splice(productIndex, 1);
     }
-    this.saveCartItems();
+    this.saveCartItems(callback);
     return true;
   }
 
-  saveCartItems() {
+  saveCartItems(callback) {
     fs.writeFile(productDataFilePath, JSON.stringify(this.cart), (error) => {
-      console.log(error)
+      if (error)
+        console.log(error)
+      callback(error)
     });
   }
 }

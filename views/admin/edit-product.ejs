@@ -1,38 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <%- include('./../partials/header'); %>
-  <link rel="stylesheet" href="/css/add-product.css">
-</head>
-<body>
-  <%- include('./../partials/navbar'); %>
-  <div class="shop-add-product_container">
-    <h3 class="shop-add-product_header">Edit Product</h3>
-    <hr><br>
-    <form action="/admin/edit-product/:<%= product.id%>" method="PATCH">
-      <div class="shop-add-product_form-control">
-        <input type="text" id="name" name="name" required value="<%= product.name %>">
-        <label for="name">Product Name:</label>
-      </div>
-      <div class="shop-add-product_form-control">
-        <input type="number" id="price" name="price" step="0.01" required value="<%= product.price %>">
-        <label for="price">Price:</label>
-      </div>
-      <div class="shop-add-product_form-control">
-        <input type="text" id="imageUrl" name="imageUrl" value="<%= product.imageUrl %>">
-        <label for="imageUrl">Product Image URL:</label>
-      </div>
-      <div class="shop-add-product_form-control">
-        <textarea rows="3" id="description" name="description" value="<%= product.description %>">
+  <head>
+    <%- include('./../partials/header'); %>
+    <link rel="stylesheet" href="/css/add-product.css" />
+  </head>
+  <body>
+    <%- include('./../partials/navbar'); %>
+    <div class="shop-add-product_container">
+      <h3 class="shop-add-product_header">Edit Product</h3>
+      <hr />
+      <br />
+      <form action="/admin/edit-product/<%= product.id%>" method="POST">
+        <div class="shop-add-product_form-control">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            value="<%= product.name %>"
+          />
+          <label for="name">Product Name:</label>
+        </div>
+        <div class="shop-add-product_form-control">
+          <input
+            type="number"
+            id="price"
+            name="price"
+            step="0.01"
+            required
+            value="<%= product.price %>"
+          />
+          <label for="price">Price:</label>
+        </div>
+        <div class="shop-add-product_form-control">
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            value="<%= product.imageUrl %>"
+          />
+          <label for="imageUrl">Product Image URL:</label>
+        </div>
+        <div class="shop-add-product_form-control">
+          <textarea id="description" name="description">
           <%= product.description %>
-        </textarea>
-        <label for="description">Description</label>
-      </div>
-      <div class="shop-add-product_form-control-btns">
-        <a class="btn-link btn-link-primary" href="/">Cancel</a>
-        <button class="btn btn-primary" type="submit">Save</button>
-      </div>
-    </form> 
-  </div>
-</body>
+        </textarea
+          >
+          <label for="description">Description</label>
+        </div>
+        <div class="shop-add-product_form-control-btns">
+          <a class="btn-link btn-link-primary" href="javascript:history.back()">Cancel</a>
+          <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+      </form>
+      <form
+        method="POST"
+        action="/admin/delete-product/<%= product.id%>"
+        style="position: absolute; top: 1.25rem; right: 1rem;"
+      >
+        <button class="btn btn-small btn-danger" type="submit">Delete</button>
+      </form>
+    </div>
+  </body>
 </html>

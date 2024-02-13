@@ -8,6 +8,7 @@
   max-width: 30rem;
   animation: page-load ease-out 0.25s forwards;
   width: 85dvw;
+  position: relative;
 }
 
 .shop-add-product_header {
@@ -15,10 +16,6 @@
   padding-top: 0;
   margin-top: 0.25rem;
   margin-bottom: 1rem;
-}
-hr {
-  border: none;
-  border-bottom: solid 1px #ccc;
 }
 .shop-add-product_form-control  {
   text-align: left;
@@ -39,18 +36,19 @@ hr {
   padding: 0.5rem;
   border-radius: 5px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: #666;
+  color: var(--text-1);
+  font-size: 1rem;
   border: solid 1px #ccc;
 }
 
 .shop-add-product_container input:focus,
 .shop-add-product_container textarea:focus {
-  outline: solid 2px royalblue;
+  outline: solid 2px var(--primary);
 }
 
 .shop-add-product_container input:focus + label,
 .shop-add-product_container textarea:focus + label {
-  color: royalblue;
+  color: var(--primary);
 }
 
 .shop-add-product_form-control-btns {

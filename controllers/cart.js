@@ -4,6 +4,7 @@ const shoppingCart = require('./../models/Cart');
 module.exports.getCart = (req, res, next) => {
   Product.fetchAll((products) => {
     const cartProds = [];
+    const summary = [];
     shoppingCart.cart.forEach((prod) => {
       const product = products.find((e) => e.id === prod.productId);
       if (!product) {
@@ -15,9 +16,16 @@ module.exports.getCart = (req, res, next) => {
       } else {
         cartProds.push({ ...product, quantity: prod.quantity });
       }
+      summary.push({
+        name: product.name,
+        quantity: prod.quantity,
+        price: product.price * prod.quantity,
+      });
     });
     res.render('cart', {
       products: cartProds,
+      summary: summary,
+      totalPrice: shoppingCart.totalPrice,
       pageTitle: 'Shop Mart - Shopping Cart',
       path: '/cart',
     });
@@ -25,21 +33,26 @@ module.exports.getCart = (req, res, next) => {
 };
 
 module.exports.addToCart = (req, res, next) => {
-  const id = req.body.productId
-  const price = req.body.price
+  const id = req.body.productId;
+  const price = req.body.price;
   if (!id || !price) {
-    res.status(404).render('404', { pageTitle: '404! Not Found.', path: req.path });
+    res
+      .status(404)
+      .render('404', { pageTitle: '404! Not Found.', path: req.path });
   } else {
-    shoppingCart.add(id, price);
-    res.redirect('/cart');
+    shoppingCart.add(id, price, (error) => {
+      if (error) {
+        return res.redirect(req.get('referer'));
+      } else res.redirect('/cart');
+    });
   }
-}
+};
 
 module.exports.deleteCart = (req, res, next) => {
   const id = req.body.productId;
-  console.log("Inside delete cart item", id)
   if (!id) return res.redirect('/cart');
 
-  const deleteOperation = shoppingCart.remove(id);
-  res.redirect('/cart');
-}
+  shoppingCart.remove(id, (error) => {
+    res.redirect('/cart');
+  });
+};

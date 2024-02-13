@@ -63,6 +63,13 @@ class Product {
       callback(reqProd);
     })
   }
+
+  static delete(id, callback) {
+    readProductFileContents(products => {
+      const newProducts = products.filter(e => e.id !== id);
+      fs.writeFile(productDataFilePath, JSON.stringify(newProducts), callback);
+    })
+  }
 }
 
 module.exports = Product;

@@ -76,15 +76,14 @@ module.exports.getEditProduct = (req, res, next) => {
   });
 };
 
-module.exports.patchEditProduct = (req, res, next) => {
+module.exports.postEditProduct = (req, res, next) => {
   const id = req.params.productId;
   const data = {
-    name: body.name.trim(),
-    price: body.price.trim(),
-    imageUrl: body.imageUrl?.trim(),
-    description: body.description?.trim(),
+    name: req.body.name.trim(),
+    price: req.body.price.trim(),
+    imageUrl: req.body.imageUrl?.trim(),
+    description: req.body.description?.trim(),
   }
-  console.log("inside patch edit product", id, data)
   Product.patch(id, data, (error, productDetails) => {
     if (error) {
       res.status(404).render('404', { pageTitle: '404! Not Found.', path: req.path });
@@ -97,3 +96,14 @@ module.exports.patchEditProduct = (req, res, next) => {
     }
   })
 };
+
+module.exports.deleteProduct = (req, res, next) => {
+  const id = req.params.productId;
+  Product.delete(id, (error) => {
+    if (error) {
+      return res.redirect(req.get('referer'));
+    } else {
+      return res.redirect('/products')
+    }
+  })
+}

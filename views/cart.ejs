@@ -8,32 +8,74 @@
     <%- include('./partials/navbar'); %>
     <div class="shop-cart_container">
       <h1 class="shop-cart_title">Shopping Cart</h1>
-      <% if (products.length) {%>
+      <main class="shop-cart_main-body">
+        <% if (products.length) {%>
         <ul class="shop-cart_products-wrapper">
           <% products.forEach((prod, index) => { %>
-          <li class="shop-cart_product-item" style="animation-delay: <%= index * 60 %>ms">
+          <li
+            class="shop-cart_product-item"
+            style="animation-delay: <%= index * 60 %>ms"
+          >
             <img src="<%= prod.imageUrl %>" />
             <div class="shop-cart_contents">
               <div class="header">
                 <h3 class="title"><%= prod.name %></h3>
-                <p class="price"><span style="color: var(--text-1)">Price: </span>&#8377;<%= prod.price %></p>
-                <span class="price"><span style="color: var(--text-1)">Quantity: </span><%= prod.quantity %></span>
+                <span class="price">
+                  <span style="color: var(--text-1)">Quantity: </span>
+                  <span><%=prod.quantity %></span>
+                </span>
+                <span class="price">
+                  <span style="color: var(--text-1)">Price: </span>
+                  <span>&#8377;<%=prod.price %></span>
+                </span>
               </div>
-              <form id="/cart/<%= prod.id %>" method="POST" action="/cart/<%= prod.id %>" class="shop-cart_products-action-btns">
-                <input id="input/cart/<%= prod.id %>"  type="hidden" name="productId" value="<%= prod.id%>"/>
-                <a class="btn-link btn-link-primary" href="/products/<%= prod.id %>">Details</a>
+              <form
+                id="/cart/<%= prod.id %>"
+                method="POST"
+                action="/cart/<%= prod.id %>"
+                class="shop-cart_products-action-btns"
+              >
+                <input
+                  id="input/cart/<%= prod.id %>"
+                  type="hidden"
+                  name="productId"
+                  value="<%= prod.id%>"
+                />
+                <a
+                  class="btn-link btn-link-primary"
+                  href="/products/<%= prod.id %>"
+                  >Details</a
+                >
                 <button type="submit" class="btn btn-primary">Remove</button>
               </form>
             </div>
           </li>
           <% }); %>
         </ul>
-      <% } else { %>
+        <div class="shop-cart_summary-wrapper">
+          <h3>Cart Summary</h3>
+          <% summary.forEach(item => { %>
+            <div class="shop-cart_summary-item">
+              <span><%= item.name %></span>
+              <span>Qty: <%= item.quantity %></span>
+              <span>Price: <%= item.price %></span>
+            </div>
+            <hr>
+          <% }); %>
+          <div class="shop-cart_summary-total-price">
+            <span>Total Price</span>
+            <span><%= totalPrice %></span>
+          </div>
+          <hr>
+          <button class="btn btn-primary shop-cart_summary-checkout-button">Proceed to Buy</button>
+        </div>
+        <% } else { %>
         <div class="shop-cart_no-products-wrapper">
           <h3>You cart is empty!</h3>
           <p><a href="/products">Click here</a> to start shopping.</p>
         </div>
-      <% } %>
+        <% } %>
+      </main>
     </div>
   </body>
 </html>

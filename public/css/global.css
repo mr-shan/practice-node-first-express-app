@@ -27,6 +27,16 @@ body {
   background-color: var(--primary);
 }
 
+.btn-danger {
+  color: var(--text-2);
+  background: rgb(255, 61, 61);
+}
+
+.btn-small {
+  font-size: 12px;
+  padding: 0.3rem 0.75rem;
+}
+
 .btn-link {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -40,6 +50,11 @@ body {
   color: var(--primary);
   background: var(--text-2);
   border: solid 1px var(--primary);
+}
+
+hr {
+  border: none;
+  border-bottom: solid 1px #ccc;
 }
 
 @keyframes page-load {
