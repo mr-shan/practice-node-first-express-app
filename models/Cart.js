@@ -29,7 +29,11 @@ class Cart {
       this.cart.forEach(item => {
         this.totalPrice += item.price * item.quantity
       })
-      if (isNaN(this.totalPrice)) this.totalPrice = 0;
+      if (isNaN(this.totalPrice)) {
+        this.totalPrice = 0;
+      } else {
+        this.totalPrice = Math.floor(this.totalPrice * 100) / 100;
+      }
     })
   }
 
