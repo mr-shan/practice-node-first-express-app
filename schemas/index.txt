@@ -1,0 +1,9 @@
+CREATE TABLE `practice_node_first_express_app`.`products` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(256) NOT NULL,
+    `price` DOUBLE NOT NULL,
+    `image_url` VARCHAR(256) NOT NULL,
+    `description` TEXT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
+)

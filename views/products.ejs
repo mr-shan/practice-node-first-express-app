@@ -12,7 +12,7 @@
         <ul class="shop-products_products-wrapper">
           <% products.forEach((prod, index) => { %>
           <li class="shop-products_product-item" style="animation-delay: <%= index * 40 %>ms">
-            <img src="<%= prod.imageUrl %>" />
+            <img src="<%= prod.image_url %>" />
             <div class="header">
               <span class="title"><%= prod.name %></span>
               <span class="price">&#8377;<%= prod.price %></span>

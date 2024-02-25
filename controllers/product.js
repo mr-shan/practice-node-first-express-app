@@ -1,31 +1,42 @@
 const Product = require('./../models/Product');
 
 module.exports.getProducts = (req, res) => {
-  Product.fetchAll((products) => {
-    res.render('products', {
-      pageTitle: 'Shop Mart - Products Home',
-      path: '/products',
-      products: products,
+  Product.fetchAll()
+    .then(([products, fieldData]) => {
+      res.render('products', {
+        pageTitle: 'Shop Mart - Products Home',
+        path: '/products',
+        products: products,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      res
+        .status(404)
+        .render('404', { pageTitle: '404! Not Found.', path: req.path });
     });
-  });
 };
 
 module.exports.getProductDetails = (req, res, next) => {
   const id = req.params.productId;
-  Product.get(id, (product) => {
-    if (!product) {
-      res
-        .status(404)
-        .render('404', { pageTitle: '404! Not Found.', path: req.path });
-      return;
-    } else {
-      res.render('product-details', {
-        pageTitle: 'Shop Mart - ' + product.name,
-        product: product,
-        path: '/products',
-      });
-    }
-  });
+  Product.get(id)
+    .then(([products, fieldData]) => {
+      const product = products[0];
+      console.log(product);
+      if (!product) {
+        res
+          .status(404)
+          .render('404', { pageTitle: '404! Not Found.', path: req.path });
+        return;
+      } else {
+        res.render('product-details', {
+          pageTitle: 'Shop Mart - ' + product.name,
+          product: product,
+          path: '/products',
+        });
+      }
+    })
+    .catch((error) => console.error(error));
 };
 
 module.exports.postProduct = (req, res) => {
@@ -34,17 +45,19 @@ module.exports.postProduct = (req, res) => {
     const newProd = new Product(
       body.name.trim(),
       body.price.trim(),
-      body.imageUrl?.trim(),
+      body.image_url?.trim(),
       body.description?.trim() || 'Test description',
       []
     );
-    newProd.save((error) => {
-      if (error) {
+    newProd.save()
+      .then(data => {
+        console.log(data);
+        res.redirect('/products');
+      })
+      .catch(error => {
         console.log(error);
-        // handle error, send error page
-      }
-      res.redirect('/products');
-    });
+        // handle error, send error page.
+      })
   } else {
     res.redirect('/add-product');
   }
@@ -59,21 +72,24 @@ module.exports.getAddProduct = (req, res) => {
 
 module.exports.getEditProduct = (req, res, next) => {
   const id = req.params.productId;
-  Product.get(id, (product) => {
-    console.log(product)
-    if (!product) {
-      res
-        .status(404)
-        .render('404', { pageTitle: '404! Not Found.', path: req.path });
-      return;
-    } else {
-      res.render('admin/edit-product', {
-        pageTitle: 'Shop Mart - ' + product.name,
-        product: product,
-        path: '/products',
-      });
-    }
-  });
+  Product.get(id)
+    .then(([products, fieldData]) => {
+      const product = products[0];
+      console.log(product);
+      if (!product) {
+        res
+          .status(404)
+          .render('404', { pageTitle: '404! Not Found.', path: req.path });
+        return;
+      } else {
+        res.render('admin/edit-product', {
+          pageTitle: 'Shop Mart - ' + product.name,
+          product: product,
+          path: '/products',
+        });
+      }
+    })
+    .catch((error) => console.error(error));
 };
 
 module.exports.postEditProduct = (req, res, next) => {
@@ -81,29 +97,39 @@ module.exports.postEditProduct = (req, res, next) => {
   const data = {
     name: req.body.name.trim(),
     price: req.body.price.trim(),
-    imageUrl: req.body.imageUrl?.trim(),
+    image_url: req.body.image_url?.trim(),
     description: req.body.description?.trim(),
-  }
-  Product.patch(id, data, (error, productDetails) => {
-    if (error) {
-      res.status(404).render('404', { pageTitle: '404! Not Found.', path: req.path });
-    } else {
+  };
+  Product.patch(id, data)
+    .then(data => {
+      console.log(data);
+      return Product.get(id);
+    })
+    .then(([products, fieldData]) => {
+      const product = products[0];
       res.render('product-details', {
-        pageTitle: 'Shop Mart - ' + productDetails.name,
-        product: productDetails,
+        pageTitle: 'Shop Mart - ' + product.name,
+        product: product,
         path: '/products',
       });
-    }
-  })
+    })
+    .catch(error => {
+      console.error(error)
+      res
+      .status(404)
+      .render('404', { pageTitle: '404! Not Found.', path: req.path });
+    })
 };
 
 module.exports.deleteProduct = (req, res, next) => {
   const id = req.params.productId;
-  Product.delete(id, (error) => {
-    if (error) {
+  Product.delete(id)
+    .then((data) => {
+      console.log(data);
+      return res.redirect('/products');
+    })
+    .catch((error) => {
+      console.error(error);
       return res.redirect(req.get('referer'));
-    } else {
-      return res.redirect('/products')
-    }
-  })
-}
+    });
+};

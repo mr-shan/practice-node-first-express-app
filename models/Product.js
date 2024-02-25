@@ -1,74 +1,56 @@
-const { v4: uuidv4 } = require('uuid');
-
-const path = require('path');
-const fs = require('fs');
+const db = require('./../tools/database');
 
 const { DEFAULT_PRODUCT_IMAGE_URL } = require('./../helpers/constant');
-const basePath = require('./../helpers/path');
-
-// helper functions
-const productDataFilePath = path.join(basePath, 'data', 'products.json');
-const readProductFileContents = (callback) => {
-  fs.readFile(productDataFilePath, (error, fileContents) => {
-    let products = []
-    if (!error) {
-      products = JSON.parse(fileContents)
-    }
-    callback(products);
-  })
-}
 
 class Product {
-  constructor(name, price, imgUrl = DEFAULT_PRODUCT_IMAGE_URL, description = '', categories = []) {
-    this.id = uuidv4();
+  constructor(
+    name,
+    price,
+    imgUrl = DEFAULT_PRODUCT_IMAGE_URL,
+    description = '',
+    categories = []
+  ) {
+    this.id = '';
     this.name = name;
     this.price = price;
-    this.imageUrl = imgUrl;
-    this.description = description
-    this.categories = categories
+    this.image_url = imgUrl;
+    this.description = description;
+    this.categories = categories;
   }
 
-  save(callback) {
-    readProductFileContents(products => {
-      products.push(this);
-      fs.writeFile(productDataFilePath, JSON.stringify(products), callback);
-    })
+  save() {
+    const query = `
+      INSERT INTO products
+      (name, price, image_url, description)
+      VALUES
+      ('${this.name}', '${this.price}', '${this.image_url}', '${this.description}')
+    `
+    return db.execute(query);
   }
 
   static patch(productId, data, callback) {
-    readProductFileContents(products => {
-      const productIndex = products.findIndex(e => e.id === productId);
-      if (productIndex === -1) {
-        callback('product not found');
-      }
-      const productDetails = products[productIndex];
-      products[productIndex] = { ...productDetails, ...data };
-      fs.writeFile(productDataFilePath, JSON.stringify(products), (error) => {
-        if (error) {
-          callback(error, null);
-        } else {
-          callback(null, products[productIndex]);
-        }
-      });
-    })
+    console.log(data);
+    const query = `
+      UPDATE products SET
+      name='${data.name}',
+      price='${data.price}',
+      image_url='${data.image_url}',
+      description='${data.description}'
+      WHERE id=${productId}
+    `;
+    return db.execute(query);
   }
 
-  static fetchAll(callback) {
-    readProductFileContents(callback)
+  static fetchAll() {
+    return db.execute('SELECT * FROM products');
   }
 
   static get(id, callback) {
-    readProductFileContents(products => {
-      const reqProd = products.find(e => e.id === id);
-      callback(reqProd);
-    })
+    return db.execute('SELECT * FROM products WHERE id = ' + id);
   }
 
-  static delete(id, callback) {
-    readProductFileContents(products => {
-      const newProducts = products.filter(e => e.id !== id);
-      fs.writeFile(productDataFilePath, JSON.stringify(newProducts), callback);
-    })
+  static delete(id) {
+    return db.execute(`DELETE FROM products where id=${id}`);
   }
 }
 

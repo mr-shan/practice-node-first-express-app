@@ -1,5 +1,7 @@
+// note modules imports
 const path = require('path');
 
+// express imports
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -25,7 +27,6 @@ app.use(productRoutes)
 app.use('/admin',adminRoutes);
 app.use(cartRoutes);
 app.use(appRoutes);
-
 
 app.listen(3000, () => {
   console.log('Express server running at 3000');

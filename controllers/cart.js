@@ -2,34 +2,36 @@ const Product = require('./../models/Product');
 const shoppingCart = require('./../models/Cart');
 
 module.exports.getCart = (req, res, next) => {
-  Product.fetchAll((products) => {
-    const cartProds = [];
-    const summary = [];
-    shoppingCart.cart.forEach((prod) => {
-      const product = products.find((e) => e.id === prod.productId);
-      if (!product) {
-        cartProds.push({
-          id: prod.id,
-          name: 'This product is deleted',
-          imageUrl: '',
+  Product.fetchAll()
+    .then(([products, fields]) => {
+      const cartProds = [];
+      const summary = [];
+      shoppingCart.cart.forEach((prod) => {
+        const product = products.find((e) => e.id === prod.productId);
+        if (!product) {
+          cartProds.push({
+            id: prod.id,
+            name: 'This product is deleted',
+            image_url: '',
+          });
+        } else {
+          cartProds.push({ ...product, quantity: prod.quantity });
+        }
+        summary.push({
+          name: product.name,
+          quantity: prod.quantity,
+          price: product.price * prod.quantity,
         });
-      } else {
-        cartProds.push({ ...product, quantity: prod.quantity });
-      }
-      summary.push({
-        name: product.name,
-        quantity: prod.quantity,
-        price: product.price * prod.quantity,
       });
-    });
-    res.render('cart', {
-      products: cartProds,
-      summary: summary,
-      totalPrice: shoppingCart.totalPrice,
-      pageTitle: 'Shop Mart - Shopping Cart',
-      path: '/cart',
-    });
-  });
+      res.render('cart', {
+        products: cartProds,
+        summary: summary,
+        totalPrice: shoppingCart.totalPrice,
+        pageTitle: 'Shop Mart - Shopping Cart',
+        path: '/cart',
+      });
+    })
+    .catch(error => console.error(error))
 };
 
 module.exports.addToCart = (req, res, next) => {
