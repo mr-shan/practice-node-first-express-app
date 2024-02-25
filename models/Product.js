@@ -19,38 +19,25 @@ class Product {
   }
 
   save() {
-    const query = `
-      INSERT INTO products
-      (name, price, image_url, description)
-      VALUES
-      ('${this.name}', '${this.price}', '${this.image_url}', '${this.description}')
-    `
-    return db.execute(query);
+    const query = 'INSERT INTO products (name, price, image_url, description) VALUES (?, ?, ?, ?)'
+    return db.execute(query, [this.name, this.price, this.image_url, this.description]);
   }
 
   static patch(productId, data, callback) {
-    console.log(data);
-    const query = `
-      UPDATE products SET
-      name='${data.name}',
-      price='${data.price}',
-      image_url='${data.image_url}',
-      description='${data.description}'
-      WHERE id=${productId}
-    `;
-    return db.execute(query);
+    const query = 'UPDATE products SET name=?, price=?, image_url=?, description=? WHERE id=?'
+    return db.execute(query, [data.name, data.price, data.image_url, data.description, productId]);
   }
 
   static fetchAll() {
     return db.execute('SELECT * FROM products');
   }
 
-  static get(id, callback) {
-    return db.execute('SELECT * FROM products WHERE id = ' + id);
+  static get(id) {
+    return db.execute('SELECT * FROM products WHERE id=?', [id]);
   }
 
   static delete(id) {
-    return db.execute(`DELETE FROM products where id=${id}`);
+    return db.execute('DELETE FROM products where id=?', [id]);
   }
 }
 
