@@ -1,3 +1,5 @@
+// Schema for products table
+
 CREATE TABLE `practice_node_first_express_app`.`products` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(256) NOT NULL,
@@ -6,4 +8,14 @@ CREATE TABLE `practice_node_first_express_app`.`products` (
     `description` TEXT NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
+)
+
+// Schema for shopping_cart table
+
+CREATE TABLE `practice_node_first_express_app`.`shopping_cart` (
+    `id` INT UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
+    `product_id` INT UNIQUE NOT NULL,
+    `quantity` INT NOT NULL,
+    `price` DOUBLE NOT NULL,
+    PRIMARY KEY (`id`)
 )

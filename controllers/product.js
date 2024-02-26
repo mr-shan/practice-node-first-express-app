@@ -75,7 +75,7 @@ module.exports.getEditProduct = (req, res, next) => {
   Product.get(id)
     .then(([products, fieldData]) => {
       const product = products[0];
-      console.log(product);
+      console.log(products);
       if (!product) {
         res
           .status(404)

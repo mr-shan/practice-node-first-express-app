@@ -1,40 +1,26 @@
 const Product = require('./../models/Product');
 const shoppingCart = require('./../models/Cart');
 
-module.exports.getCart = (req, res, next) => {
-  Product.fetchAll()
-    .then(([products, fields]) => {
-      const cartProds = [];
-      const summary = [];
-      shoppingCart.cart.forEach((prod) => {
-        const product = products.find((e) => e.id === prod.productId);
-        if (!product) {
-          cartProds.push({
-            id: prod.id,
-            name: 'This product is deleted',
-            image_url: '',
-          });
-        } else {
-          cartProds.push({ ...product, quantity: prod.quantity });
-        }
-        summary.push({
-          name: product.name,
-          quantity: prod.quantity,
-          price: product.price * prod.quantity,
-        });
-      });
-      res.render('cart', {
-        products: cartProds,
-        summary: summary,
-        totalPrice: shoppingCart.totalPrice,
-        pageTitle: 'Shop Mart - Shopping Cart',
-        path: '/cart',
-      });
-    })
-    .catch(error => console.error(error))
+module.exports.getCart = async (req, res, next) => {
+  let cartProds = [];
+  let summary = [];
+  let totalPrice = 0;
+  const cartItems = await shoppingCart.getCartData();
+  if (cartItems.cartItems.length) {
+    cartProds = cartItems.cartItems;
+    summary = cartItems.summary;
+    totalPrice = cartItems.totalPrice;
+  }
+  res.render('cart', {
+    products: cartProds,
+    summary: summary,
+    totalPrice: Math.floor(cartItems.totalPrice * 100) / 100,
+    pageTitle: 'Shop Mart - Shopping Cart',
+    path: '/cart',
+  });
 };
 
-module.exports.addToCart = (req, res, next) => {
+module.exports.addToCart = async (req, res, next) => {
   const id = req.body.productId;
   const price = req.body.price;
   if (!id || !price) {
@@ -42,19 +28,20 @@ module.exports.addToCart = (req, res, next) => {
       .status(404)
       .render('404', { pageTitle: '404! Not Found.', path: req.path });
   } else {
-    shoppingCart.add(id, price, (error) => {
-      if (error) {
-        return res.redirect(req.get('referer'));
-      } else res.redirect('/cart');
-    });
+    const result = await shoppingCart.add(id, price);
+    if (result) {
+      res.redirect('/cart');
+    } else {
+      res.redirect(req.get('referer'));
+    }
   }
 };
 
-module.exports.deleteCart = (req, res, next) => {
+module.exports.deleteCart = async (req, res, next) => {
   const id = req.body.productId;
+  console.log(id)
   if (!id) return res.redirect('/cart');
 
-  shoppingCart.remove(id, (error) => {
-    res.redirect('/cart');
-  });
+  const result = await shoppingCart.remove(id);
+  res.redirect('/cart');
 };
