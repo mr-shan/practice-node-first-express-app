@@ -1,6 +1,6 @@
 {
   "name": "first-express-app",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "A first app created with express",
   "main": "app.js",
   "scripts": {

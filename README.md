@@ -1,5 +1,5 @@
 # Online Gadget Store
-`Version: 2.0`
+`Version: 2.1`
 
 This project is a practice endeavor aimed at learning and mastering the Node.js, Express.js, MySQL and EJS Template Engine stack. It simulates an online store dedicated to selling electronic products.
 
@@ -15,8 +15,7 @@ This project is a practice endeavor aimed at learning and mastering the Node.js,
 - Node.js
 - Express.js
 - EJS Template Engine
-- MySQL
-(Note: Manual queries are made, no ORM in version 2.0. Please refer v2.1 for Sequalize ORM)
+- MySQL with the use of Sequelize ORM package.
 
 ## Usage
 
@@ -36,10 +35,9 @@ This project is a practice endeavor aimed at learning and mastering the Node.js,
 
 ## Data Management
 
-- This project uses MySQL for storing data. It needs two tables.
-- `products` and `shopping-cart`. The schema for these two can be found in `/schemas/index.txt` file.
-- Create these two tables in MySQL.
-- Put the details of MySQL in `tools/database.js` before you run the project.
+- This project uses MySQL for storing data.
+- It's managed by Sequelize ORM package. So you need to create the database before you proceed.
+- Put the details of MySQL (username, password, and name of database.) in `tools/database.js` before you run the project.
 
 ## Contributing
 
