@@ -16,6 +16,7 @@ This project is a practice endeavor aimed at learning and mastering the Node.js,
 - Express.js
 - EJS Template Engine
 - MySQL
+(Note: Manual queries are made, no ORM in version 2.0. Please refer v2.1 for Sequalize ORM)
 
 ## Usage
 
