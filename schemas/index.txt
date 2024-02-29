@@ -1,5 +1,4 @@
 // Schema for products table
-
 CREATE TABLE `practice_node_first_express_app`.`products` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(256) NOT NULL,
@@ -11,11 +10,38 @@ CREATE TABLE `practice_node_first_express_app`.`products` (
 )
 
 // Schema for shopping_cart table
-
 CREATE TABLE `practice_node_first_express_app`.`shopping_cart` (
     `id` INT UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
     `product_id` INT UNIQUE NOT NULL,
     `quantity` INT NOT NULL,
     `price` DOUBLE NOT NULL,
+    PRIMARY KEY (`id`)
+)
+
+// Schemas created using Sequelize ORM package;
+// schema for products table.
+CREATE TABLE IF NOT EXISTS `products` 
+(
+    `id` INTEGER NOT NULL auto_increment , 
+    `name` VARCHAR(255) NOT NULL, 
+    `price` DOUBLE PRECISION NOT NULL, 
+    `image_url` VARCHAR(255) DEFAULT 'https://icon-library.com/images/product-icon-png/product-icon-png-19.jpg', 
+    `description` VARCHAR(255), 
+    `createdAt` DATETIME NOT NULL, 
+    `updatedAt` DATETIME NOT NULL, 
+    `userId` INTEGER, 
+    PRIMARY KEY (`id`), 
+    FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+// schema for user table
+CREATE TABLE IF NOT EXISTS `users` 
+(
+    `id` INTEGER NOT NULL auto_increment UNIQUE , 
+    `first_name` CHAR(50) NOT NULL, 
+    `last_name` CHAR(50) NOT NULL, 
+    `email` CHAR(100) NOT NULL, 
+    `createdAt` DATETIME NOT NULL, 
+    `updatedAt` DATETIME NOT NULL, 
     PRIMARY KEY (`id`)
 )
